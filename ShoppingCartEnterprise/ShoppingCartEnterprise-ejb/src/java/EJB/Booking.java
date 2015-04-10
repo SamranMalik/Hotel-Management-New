@@ -69,7 +69,7 @@ public class Booking implements Serializable {
         this.clientid = clientid;
         this.roomid = roomid;
     }
-
+    
     public BigDecimal getBookingid() {
         return bookingid;
     }

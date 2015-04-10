@@ -7,6 +7,7 @@
 package EJB;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,10 +43,17 @@ public class RoomBooking implements RoomBookingRemote, RoomBookingLocal {
       Room selected = (Room) selectedRoom;
       room = em.find(Room.class, selected.getRoomid());
    }
-   public List rooms()
+   public List roomtypes()
    {
+       //roomtypes = em.createNativeQuery("SELECT r.roomid, r.roomnumber, r.floor, r.isreserved, t.Name FROM Room r join RoomType t where r.RoomTypeID = t.RoomTypeID order by r.RoomNumber").getResultList();
        roomtypes = em.createNamedQuery("Roomtype.findAll").getResultList();
        return roomtypes;
+   }
+   
+   public List rooms()
+   {
+       rooms = em.createNamedQuery("Room.findAll").getResultList();
+       return rooms;
    }
    
    public List roomByType(String roomtype)
@@ -53,6 +61,13 @@ public class RoomBooking implements RoomBookingRemote, RoomBookingLocal {
        roomtypes = em.createNamedQuery("Roomtype.findByName", Roomtype.class).setParameter("name", roomtype).getResultList();     
        return roomtypes;
    }
+   
+   public Roomtype roomTypeNameByID(Integer RoomTypeID)
+   {
+       Roomtype roomtype = em.createNamedQuery("Roomtype.findByRoomtypeid", Roomtype.class).setParameter("roomtypeid", RoomTypeID).getSingleResult();     
+       return roomtype;
+   }
+   
     @Override
    public void bookRoom(Object room1,Object client,String checkin, String checkout)
    {

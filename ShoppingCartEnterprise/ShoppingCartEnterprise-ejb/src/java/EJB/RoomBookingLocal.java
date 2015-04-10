@@ -18,7 +18,9 @@ public interface RoomBookingLocal {
     public void selectRoom(Object selectedRoom);
     public void bookRoom(Object r,Object c,String checkin, String checkout);
     public List rooms();
+    public List roomtypes();
     public List roomByType(String roomtype);
+    public Object roomTypeNameByID(Integer RoomTypeID);
    //public void bookRoom(); 
    //public void setBookingDetails();
    public boolean isBookingValid(); 

@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Room.findAll", query = "SELECT r FROM Room r"),
+    //@NamedQuery(name = "Room.findAllWithRoomType", query = "SELECT r.roomid, r.roomnumber, r.floor, r.isreserved, t.Name FROM Room r join RoomType t where r.RoomTypeID = t.RoomTypeID"),
     @NamedQuery(name = "Room.findByRoomid", query = "SELECT r FROM Room r WHERE r.roomid = :roomid"),
     @NamedQuery(name = "Room.findByRoomtypeid", query = "SELECT r FROM Room r WHERE r.roomtypeid = :roomtypeid"),
     @NamedQuery(name = "Room.findByRoomnumber", query = "SELECT r FROM Room r WHERE r.roomnumber = :roomnumber"),
@@ -43,7 +44,7 @@ public class Room implements Serializable {
     @Column(name = "ROOMID")
     private BigDecimal roomid;
     @Column(name = "ROOMTYPEID")
-    private BigInteger roomtypeid;
+    private Integer roomtypeid;
     @Size(max = 50)
     @Column(name = "ROOMNUMBER")
     private String roomnumber;
@@ -66,12 +67,12 @@ public class Room implements Serializable {
     public void setRoomid(BigDecimal roomid) {
         this.roomid = roomid;
     }
-
-    public BigInteger getRoomtypeid() {
+    
+    public Integer getRoomtypeid() {
         return roomtypeid;
     }
 
-    public void setRoomtypeid(BigInteger roomtypeid) {
+    public void setRoomtypeid(Integer roomtypeid) {
         this.roomtypeid = roomtypeid;
     }
 

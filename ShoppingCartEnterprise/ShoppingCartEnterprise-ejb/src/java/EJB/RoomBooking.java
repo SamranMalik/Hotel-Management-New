@@ -6,6 +6,7 @@
 
 package EJB;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -64,7 +65,8 @@ public class RoomBooking implements RoomBookingRemote, RoomBookingLocal {
         room = em.createNamedQuery("Room.findByRoomtypeid", Room.class).setParameter("roomtypeid", r.getRoomtypeid()).getSingleResult();
         booking.setRoomid(room.getRoomid().toBigInteger());
         booking.setClientid(c.getClientid().toBigInteger());
-        em.persist(booking);
+        booking.setBookingid(BigDecimal.ZERO);
+        em.persist((Booking) booking);
    }
    
   /* public void setBookingDetails()
